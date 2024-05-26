@@ -46,8 +46,6 @@ function countdownTimer() {
 });
 
 
-
-
 document.addEventListener('DOMContentLoaded', function() {
   const textTitle = [
     "Ислам оставит игры",
@@ -55,17 +53,25 @@ document.addEventListener('DOMContentLoaded', function() {
     "Хьамзат т1ер хумш",
     "Мооохь",
     "Муслим скинет вес",
-    "Халид зверь",
-    "Асхьаб Билли",
+    "Халид зверь"
   ];
+
+  let shuffledTextTitle = shuffleArray([...textTitle]);
+  let currentIndex = 0;
 
   const button = document.querySelector('.btn-text');
   const phraseElement = document.querySelector('.text-title');
 
   button.addEventListener('click', function() {
     const randomIndex = Math.floor(Math.random() * textTitle.length);
-    const randomPhrase = textTitle[randomIndex];
-    
+    const randomPhrase = shuffledTextTitle[currentIndex];
+    currentIndex++;
+
+    if (currentIndex >= shuffledTextTitle.length) {
+      shuffledTextTitle = shuffleArray([...textTitle]);
+      currentIndex = 0;
+    }
+
     // Плавное исчезновение текста
     phraseElement.classList.remove('fade-in');
     phraseElement.classList.add('fade-out');
@@ -77,4 +83,13 @@ document.addEventListener('DOMContentLoaded', function() {
       phraseElement.classList.add('fade-in');
     }, 500); // Время должно совпадать с transition в CSS
   });
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
 });
+
