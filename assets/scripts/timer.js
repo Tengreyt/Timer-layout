@@ -3,6 +3,8 @@ const hoursTimer = document.querySelector('.timer__hours');
 const minutesTimer = document.querySelector('.timer__minutes');
 const secondsTimer = document.querySelector('.timer__seconds');
 
+const textInner = document.querySelector('.text-title');
+
 
 document.addEventListener('DOMContentLoaded', function (){
     const deadline = new Date(2024, 5, 26);
@@ -44,3 +46,35 @@ function countdownTimer() {
 });
 
 
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const textTitle = [
+    "Ислам оставит игры",
+    "Ваха ху даьш ву",
+    "Хьамзат т1ер хумш",
+    "Мооохь",
+    "Муслим скинет вес",
+    "Халид зверь",
+    "Асхьаб Билли",
+  ];
+
+  const button = document.querySelector('.btn-text');
+  const phraseElement = document.querySelector('.text-title');
+
+  button.addEventListener('click', function() {
+    const randomIndex = Math.floor(Math.random() * textTitle.length);
+    const randomPhrase = textTitle[randomIndex];
+    
+    // Плавное исчезновение текста
+    phraseElement.classList.remove('fade-in');
+    phraseElement.classList.add('fade-out');
+
+    // Обновляем текст после завершения анимации исчезновения
+    setTimeout(() => {
+      phraseElement.textContent = randomPhrase;
+      phraseElement.classList.remove('fade-out');
+      phraseElement.classList.add('fade-in');
+    }, 500); // Время должно совпадать с transition в CSS
+  });
+});
